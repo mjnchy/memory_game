@@ -56,25 +56,4 @@ const App = () => {
   );
 };
 
-async () => {
-
-  for (let i = 0; i < data.results.length; i++) {
-    const pokemon = data.results[i];
-    const response = await fetch(pokemon.url);
-    const obj = await response.json()
-    const img = await obj.sprites.front_default;
-
-    arr.push(<Card content={[pokemon.name, img]} key={pokemon.name} onclick={onClick} />);
-  };
-}
-
-async (api) => {
-  const response = await fetch(api);
-  const data = await response.json();
-  const objArr = data.results.map(obj => fetch(obj.url));
-  console.log(objArr)
-
-};
-
-
 export default App

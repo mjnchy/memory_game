@@ -4,27 +4,38 @@ import "./index.css";
 
 const limit = 15;
 const key = `https://pokeapi.co/api/v2/pokemon?offset=0&limit=${limit}`;
-const fetchData = async (api) => {
-  const arr = [];
+const fetchCards = async (api, onClick) => {
   const response = await fetch(api);
   const data = await response.json();
+  const pokemonData = await Promise.all(data.results.map(async pokemon => {
+    const url = await fetch(pokemon.url);
+    const json = await url.json();
 
-  for (let i = 0; i < data.results.length; i++) {
-    const pokemon = data.results[i];
-    const response = await fetch(pokemon.url);
-    const obj = await response.json()
-    const img = await obj.sprites.front_default;
+    return <Card
+      content={[pokemon.name, json.sprites.front_default]}
+      key={pokemon.name}
+      onclick={onClick}
+    />
+  }))
 
-    arr.push({ name: pokemon.name, img });
+
+  return pokemonData;
+};
+
+const randomizeArr = (arr) => {
+  const randomizedArr = [];
+
+  while (arr.length) {
+    const index = Math.floor(Math.random() * arr.length);
+    randomizedArr.push(...arr.splice(index));
   };
 
-  return arr;
+  return randomizedArr;
 };
 
 const App = () => {
   const [pokemons, setPokemons] = useState([]);
   const [record, setRecord] = useState({ score: 0, selections: {} });
-  const arr = [];
 
   const handleClick = (name) => {
     setRecord((prev => {
@@ -34,19 +45,7 @@ const App = () => {
   };
 
   useEffect(() => {
-    fetchData(key).then(pokemons => {
-      while (pokemons.length) {
-        const index = Math.floor(Math.random() * pokemons.length);
-        arr.push(<Card
-          content={[pokemons[index].name, pokemons[index].img]}
-          key={pokemons[index].name}
-          onclick={handleClick}
-        />);
-        pokemons.splice(index, 1);
-      }
-
-      setPokemons(arr);
-    })
+    fetchCards(key, handleClick).then(pokemons => setPokemons(randomizeArr(pokemons)));
   }, []);
 
   return (
@@ -55,6 +54,26 @@ const App = () => {
       Score: {record.score}
     </div>
   );
+};
+
+async () => {
+
+  for (let i = 0; i < data.results.length; i++) {
+    const pokemon = data.results[i];
+    const response = await fetch(pokemon.url);
+    const obj = await response.json()
+    const img = await obj.sprites.front_default;
+
+    arr.push(<Card content={[pokemon.name, img]} key={pokemon.name} onclick={onClick} />);
+  };
+}
+
+async (api) => {
+  const response = await fetch(api);
+  const data = await response.json();
+  const objArr = data.results.map(obj => fetch(obj.url));
+  console.log(objArr)
+
 };
 
 

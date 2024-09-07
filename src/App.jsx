@@ -60,6 +60,10 @@ const App = () => {
 
   return (
     <div id='main'>
+      <div className='container'>
+        <h1 id='header'>Pokemon Memory Game</h1>
+        <anchor></anchor>
+      </div>
       <div id="score-board">
         <h3 className='score'>
           Score: {record.score}

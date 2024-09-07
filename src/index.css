@@ -47,12 +47,24 @@ table {
   --text: #cdd6f4;
   --overlay1: #9399b2;
   --flamingo: #f2cdcd;
+  --red: #f38ba8;
+  --lavender: #b4befe;
 }
 
 * {
   box-sizing: border-box;
   color: var(--text);
   background-color: var(--base);
+}
+
+.container {
+  text-align: center;
+  margin: 30px auto 50px;
+}
+
+#header {
+  color: var(--red);
+  font-size: 3rem;
 }
 
 #score-board {

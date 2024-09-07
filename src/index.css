@@ -68,12 +68,44 @@ table {
   font-size: 3rem;
 }
 
-#rules {
+.info-container {
+  width: 10vw;
+  min-width: 250px;
+  gap: 20px;
+  display: flex;
+  flex-direction: row-reverse;
+  align-items: center;
   font-size: 1.5rem;
   position: absolute;
   right: 2vw;
   top: 1vh;
 }
+
+#info-icon {
+  color: var(--lavender);
+}
+
+#info-icon:hover {
+  cursor: pointer;
+}
+
+#info-icon:hover ~ #info-text {
+  opacity: 1;
+  visibility: visible;
+}
+
+#info-text {
+  flex: 1;
+  font-size: 14px;
+  border-radius: 5px;
+  text-align: left;
+  padding: 10px;
+  border: 1px solid var(--lavender);
+  border-radius: 5px;
+  opacity: 0;
+  visibility: visible;
+}
+
 
 #score-board {
   width: fit-content;
@@ -118,7 +150,7 @@ table {
 .card-img { 
   object-fit: contain;
   background-color: var(--flamingo);
-  border-radius: 0 0 20px 20px;
+  border-radius: 0 0 10px 10px;
 }
 
 .card-name {

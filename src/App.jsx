@@ -62,7 +62,12 @@ const App = () => {
     <div id='main'>
       <div className='container'>
         <h1 id='game-name' className='header'>Pokemon Memory Game</h1>
-        <i id='rules' className='fa-solid fa-circle-info' />
+        <div className='info-container'>
+          <i id='info-icon' className='fa-solid fa-circle-info' />
+          <div id='info-text'>
+            Select each pokemon only once by clicking on a card until you've selected all the pokemons.
+          </div>
+        </div>
       </div>
       <div id="score-board">
         <h3 className='score'>

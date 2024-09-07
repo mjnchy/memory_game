@@ -60,11 +60,19 @@ table {
 .container {
   text-align: center;
   margin: 30px auto 50px;
+  position: relative;
 }
 
-#header {
+#game-name {
   color: var(--red);
   font-size: 3rem;
+}
+
+#rules {
+  font-size: 1.5rem;
+  position: absolute;
+  right: 2vw;
+  top: 1vh;
 }
 
 #score-board {
@@ -73,9 +81,6 @@ table {
   display: flex;
   gap: 25px;
   font-size: 1.25rem;
-}
-
-#score-board {
 }
 
 #game-board {

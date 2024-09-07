@@ -61,8 +61,8 @@ const App = () => {
   return (
     <div id='main'>
       <div className='container'>
-        <h1 id='header'>Pokemon Memory Game</h1>
-        <anchor></anchor>
+        <h1 id='game-name' className='header'>Pokemon Memory Game</h1>
+        <i id='rules' className='fa-solid fa-circle-info' />
       </div>
       <div id="score-board">
         <h3 className='score'>

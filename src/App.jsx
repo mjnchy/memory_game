@@ -61,9 +61,14 @@ const App = () => {
   return (
     <div id='main'>
       <div id="score-board">
-        Score: {record.score}
-        Best Score: {record.bestScore}
+        <h3 className='score'>
+          Score: {record.score}
+        </h3>
+        <h3 className='score'>
+          Best Score: {record.bestScore}
+        </h3>
       </div>
+
       <div id='game-board'>
         {pokemons}
       </div>

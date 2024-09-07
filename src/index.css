@@ -42,12 +42,28 @@ table {
 	border-spacing: 0;
 }
 
+:root {
+  --base: #1e1e2e;
+  --text: #cdd6f4;
+  --overlay1: #9399b2;
+  --flamingo: #f2cdcd;
+}
+
 * {
   box-sizing: border-box;
+  color: var(--text);
+  background-color: var(--base);
 }
 
 #score-board {
-  margin: 20px;
+  width: fit-content;
+  margin: 20px auto;
+  display: flex;
+  gap: 25px;
+  font-size: 1.25rem;
+}
+
+#score-board {
 }
 
 #game-board {
@@ -57,22 +73,37 @@ table {
 }
 
 .card {
+  background-color: ;
   height: 225px;
   width: 150px;
   margin: 25px;
   border: none;
   border-radius: 10px;
-  box-shadow: 0 8px 20px 5px;
+  box-shadow: 0 4px 12px 3px var(--flamingo);
   text-align: center;
   display: flex;
   flex-direction: column;
   justify-content: center;
+  overflow: hidden;
 }
 
 .card:hover {
   cursor: pointer;
 }
 
+.img-background {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-content: center;
+}
+
+.card-img { 
+  object-fit: contain;
+  background-color: var(--flamingo);
+  border-radius: 0 0 20px 20px;
+}
+
 .card-name {
-  margin: auto auto 20px;
+  margin: 10px auto;
 }

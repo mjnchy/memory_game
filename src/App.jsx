@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import Card from './components/Card';
 import "./index.css";
 
@@ -27,7 +27,7 @@ const randomizeArr = (arr) => {
 
   while (arr.length) {
     const index = Math.floor(Math.random() * arr.length);
-    randomizedArr.push(...arr.splice(index));
+    randomizedArr.push(...arr.splice(index, 1));
   };
 
   return randomizedArr;
@@ -35,23 +35,38 @@ const randomizeArr = (arr) => {
 
 const App = () => {
   const [pokemons, setPokemons] = useState([]);
-  const [record, setRecord] = useState({ score: 0, selections: {} });
+  const [record, setRecord] = useState({ score: 0, bestScore: 0, selections: {} });
+  const originalRef = useRef([]);
 
   const handleClick = (name) => {
     setRecord((prev => {
-      if (prev.selections[name]) return { score: 0, selections: {} };
-      return { score: ++prev.score, selections: { ...prev.selections, [name]: true } };
+      if (prev.selections[name]) return { score: 0, bestScore: prev.bestScore, selections: {} };
+      const score = ++prev.score;
+      return { score, bestScore: Math.max(score, prev.bestScore), selections: { ...prev.selections, [name]: true } };
     }));
   };
 
   useEffect(() => {
-    fetchCards(key, handleClick).then(pokemons => setPokemons(randomizeArr(pokemons)));
+    fetchCards(key, handleClick).then(pokemons => {
+      const randomized = randomizeArr(pokemons);
+      originalRef.current = randomized;
+      setPokemons(randomized);
+    });
   }, []);
+
+  useEffect(() => {
+    originalRef.current.length > 0 && setPokemons(randomizeArr([...originalRef.current]))
+  }, [record.score]);
 
   return (
     <div id='main'>
-      {pokemons}
-      Score: {record.score}
+      <div id="score-board">
+        Score: {record.score}
+        Best Score: {record.bestScore}
+      </div>
+      <div id='game-board'>
+        {pokemons}
+      </div>
     </div>
   );
 };

@@ -133,11 +133,13 @@ table {
   display: flex;
   flex-direction: column;
   justify-content: center;
+  transition: ease-in, 250ms;
   overflow: hidden;
 }
 
 .card:hover {
   cursor: pointer;
+  transform: translate(0, -25px);
 }
 
 .img-background {
